@@ -1,4 +1,4 @@
-const App = () => {
+export const App = () => {
   return (
     <div
       style={{
@@ -14,5 +14,3 @@ const App = () => {
     </div>
   );
 };
-
-export default App;
