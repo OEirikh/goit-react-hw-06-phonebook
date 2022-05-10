@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import Button from "../Button";
-import s from "./ContactForm.module.css";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/AppSlice';
+import Button from '../Button';
+import s from './ContactForm.module.css';
 
-function ContactForm({ addContact }) {
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+function ContactForm() {
+  const dispatch = useDispatch();
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
   const handleInputChange = ({ currentTarget: { name, value } }) => {
     switch (name) {
-      case "name":
+      case 'name':
         setName(value);
         break;
-      case "number":
+      case 'number':
         setNumber(value);
         break;
       default:
@@ -20,11 +22,11 @@ function ContactForm({ addContact }) {
     }
   };
 
-  const onBtnClick = (e) => {
+  const onBtnClick = e => {
     e.preventDefault();
-    addContact(name, number);
-    setName("");
-    setNumber("");
+    dispatch(addContact({ name, number }));
+    setName('');
+    setNumber('');
   };
 
   return (
@@ -61,9 +63,5 @@ function ContactForm({ addContact }) {
     </form>
   );
 }
-
-ContactForm.propTypes = {
-  addContact: PropTypes.func.isRequired,
-};
 
 export default ContactForm;
