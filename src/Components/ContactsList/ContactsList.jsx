@@ -1,29 +1,24 @@
-import React from "react";
-import PropTypes from "prop-types";
-import s from "./ContactsList.module.css";
-import Contact from "./Contact";
+import { useSelector } from 'react-redux';
+import s from './ContactsList.module.css';
+import Contact from './Contact';
 
-function ContactsList({ list, onClick }) {
+function ContactsList() {
+  const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filter);
+
+  const list = () => {
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter)
+    );
+  };
+
   return (
     <ul className={s.ContactList}>
-      {list.map(({ name, number, id }, idx) => (
-        <Contact
-          key={id}
-          idx={idx}
-          name={name}
-          number={number}
-          onClick={() => {
-            onClick(id);
-          }}
-        />
+      {list().map(({ name, number, id }, idx) => (
+        <Contact key={id} idx={idx} name={name} number={number} id={id} />
       ))}
     </ul>
   );
 }
-
-ContactsList.propTypes = {
-  list: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
 
 export default ContactsList;

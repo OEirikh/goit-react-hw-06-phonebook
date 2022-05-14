@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/AppSlice';
+import { addContact } from '../../redux/ContactsSlice';
 import Button from '../Button';
 import s from './ContactForm.module.css';
 
@@ -22,7 +22,7 @@ function ContactForm() {
     }
   };
 
-  const onBtnClick = e => {
+  const onFormSubmit = e => {
     e.preventDefault();
     dispatch(addContact({ name, number }));
     setName('');
@@ -30,7 +30,7 @@ function ContactForm() {
   };
 
   return (
-    <form onSubmit={onBtnClick}>
+    <form onSubmit={onFormSubmit}>
       <label className={s.form}>
         <p>Name</p>
         <input
