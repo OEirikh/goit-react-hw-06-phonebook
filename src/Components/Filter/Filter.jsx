@@ -5,7 +5,6 @@ function Filter() {
   const dispatch = useDispatch();
   const filterValue = useSelector(state => state.filter);
 
-  console.log(filterValue);
   const onFilterChange = e => {
     dispatch(setFilter(e.currentTarget.value.toLowerCase()));
   };
